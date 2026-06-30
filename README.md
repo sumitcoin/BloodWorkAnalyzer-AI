@@ -56,15 +56,19 @@ Display Results in Streamlit UI
 
 ## 📸 Screenshots
 
-```
-/screenshot/sc3.png
+<p align="center">
+  <img src="screenshots/sc1.png" width="48%">
+  <img src="screenshots/sc2.png" width="48%">
+</p>
 
-/screenshot/sc4.png
+<p align="center">
+  <img src="screenshots/sc3.png" width="48%">
+  <img src="screenshots/sc4.png" width="48%">
+</p>
 
-/screenshot/sc5.png
-
-/screenshot/sc6.png
-```
+<p align="center">
+  <img src="screenshots/sc5.png" width="70%">
+</p>
 
 ---
 
