@@ -60,30 +60,11 @@ Display Results in Streamlit UI
 
 | Dashboard | AI Analysis |
 |-----------|-------------|
-| <img src="screenshot/sc1.png" width="100%"> | <img src="screenshot/sc2.png" width="100%"> |
+| <img src="screenshot/sc3.png" width="100%"> | <img src="screenshot/sc4.png" width="100%"> |
 
 | Diet Plan | Final Report |
 |-----------|--------------|
-| <img src="screenshot/sc3.png" width="100%"> | <img src="screenshot/sc4.png" width="100%"> |
-
-<p align="center">
-<img src="screenshots/sc5.png" width="85%">
-</p>
-
-
-<p align="center">
-  <img src="screenshot/sc1.png" width="48%">
-  <img src="screenshot/sc2.png" width="48%">
-</p>
-
-<p align="center">
-  <img src="screenshot/sc3.png" width="48%">
-  <img src="screenshot/sc4.png" width="48%">
-</p>
-
-<p align="center">
-  <img src="screenshot/sc5.png" width="70%">
-</p>
+| <img src="screenshot/sc5.png" width="100%"> | <img src="screenshot/sc6.png" width="100%"> |
 
 ---
 
