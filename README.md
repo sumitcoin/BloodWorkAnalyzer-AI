@@ -56,14 +56,14 @@ Display Results in Streamlit UI
 
 ## 📸 Screenshots
 
-> Add screenshots here after running the application.
-
 ```
-/screenshots/home.png
+/screenshot/sc3.png
 
-/screenshots/analysis.png
+/screenshot/sc4.png
 
-/screenshots/results.png
+/screenshot/sc5.png
+
+/screenshot/sc6.png
 ```
 
 ---
