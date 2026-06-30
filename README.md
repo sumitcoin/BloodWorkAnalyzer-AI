@@ -71,9 +71,9 @@ Display Results in Streamlit UI
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/<your-username>/blood-work-analyzer.git
+git clone https://github.com/sumitcoin/BloodWorkAnalyzer-AI.git
 
-cd blood-work-analyzer
+cd BloodWorkAnalyzer-AI
 
 python -m venv .venv
 
