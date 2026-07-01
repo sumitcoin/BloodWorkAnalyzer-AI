@@ -4,7 +4,7 @@ An AI-powered web application that analyzes blood test reports and generates an 
 
 Built with **Python**, **Streamlit**, **LangChain**, and **Google Gemini**, the application helps users better understand their blood test results without needing medical expertise.
 
-<img src="screenshot/sc3.png" width="100%">
+<img src="screenshot/front_page.png" width="100%">
 ---
 
 ## ✨ Features
