@@ -55,8 +55,6 @@ Display Results in Streamlit UI
 
 ---
 
-## 📸 Screenshots
-
 ## 📸 Application Preview
 
 | Dashboard | AI Analysis |
