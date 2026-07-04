@@ -78,21 +78,24 @@ st.markdown(
     font-size: 14px;
 }
 
-.nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    margin: 4px 0;
-    border-radius: 8px;
-    color: #475569;
-    font-size: 14px;
+[data-testid="stSidebar"] [role="radiogroup"] {
+    gap: 4px;
 }
 
-.nav-item.active {
+[data-testid="stSidebar"] [role="radio"] {
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #334155;
+}
+
+[data-testid="stSidebar"] [role="radio"][aria-checked="true"] {
     background: #eef4ff;
     color: #1d4ed8;
-    font-weight: 700;
+    font-weight: 800;
+}
+
+[data-testid="stSidebar"] [role="radio"] > div:first-child {
+    display: none;
 }
 
 .page-top {
@@ -102,6 +105,7 @@ st.markdown(
     gap: 18px;
     margin-bottom: 18px;
     padding-top: 2px;
+    animation: fadeUp 0.42s ease both;
 }
 
 .eyebrow {
@@ -133,6 +137,7 @@ st.markdown(
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
     margin-bottom: 16px;
+    animation: fadeUp 0.46s ease both;
 }
 
 .metric-card,
@@ -149,6 +154,13 @@ st.markdown(
     align-items: center;
     gap: 12px;
     padding: 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.metric-card:hover,
+.panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
 }
 
 .metric-icon {
@@ -187,6 +199,8 @@ st.markdown(
 .panel {
     padding: 16px;
     margin-bottom: 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    animation: fadeUp 0.48s ease both;
 }
 
 .panel-title {
@@ -255,6 +269,93 @@ st.markdown(
 .tag.blue { color: #2563eb; }
 .tag.red { color: #ef4444; }
 
+.center-message {
+    min-height: 380px;
+    display: grid;
+    place-items: center;
+}
+
+.center-message .panel {
+    max-width: 520px;
+    text-align: center;
+}
+
+.analysis-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: grid;
+    place-items: center;
+    background: rgba(247, 249, 252, 0.68);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+}
+
+.analysis-loader {
+    min-width: 360px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(219, 229, 239, 0.95);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+    padding: 28px 32px;
+    text-align: center;
+    color: #0f172a;
+    animation: loaderEnter 0.32s ease both;
+}
+
+.loader-pulse {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #fee2e2;
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: #dc2626;
+    font-weight: 900;
+}
+
+.loader-pulse::before,
+.loader-pulse::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(220, 38, 38, 0.34);
+    animation: ripple 1.4s ease-out infinite;
+}
+
+.loader-pulse::after {
+    animation-delay: 0.45s;
+}
+
+.loader-title {
+    font-size: 18px;
+    font-weight: 850;
+    margin-bottom: 6px;
+}
+
+.loader-text {
+    color: #475569;
+    font-size: 14px;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loaderEnter {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes ripple {
+    from { opacity: 0.65; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.9); }
+}
+
 .stTextArea textarea,
 [data-testid="stFileUploader"] section {
     background-color: #ffffff !important;
@@ -264,10 +365,9 @@ st.markdown(
 }
 
 [data-testid="stFileUploader"] [data-testid="stWidgetLabel"],
-[data-testid="stFileUploader"] [data-testid="stWidgetLabel"] p,
+[data-testid="stFileUploader"] [data-testid="stWidgetLabel"] *,
 [data-testid="stFileUploaderDropzone"],
-[data-testid="stFileUploaderDropzone"] small,
-[data-testid="stFileUploaderDropzone"] p,
+[data-testid="stFileUploaderDropzone"] *,
 .stTextArea label {
     color: #334155 !important;
 }
@@ -275,23 +375,10 @@ st.markdown(
 [data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"],
 [data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"] * {
     background: #2563eb !important;
-    border: 1px solid #2563eb !important;
+    border-color: #2563eb !important;
     color: #ffffff !important;
     border-radius: 8px !important;
     font-weight: 800 !important;
-}
-
-[data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"]:hover,
-[data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"]:hover * {
-    background: #1d4ed8 !important;
-    border-color: #1d4ed8 !important;
-    color: #ffffff !important;
-}
-
-[data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"] svg,
-[data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"] [data-testid="stIconMaterial"] {
-    color: #ffffff !important;
-    fill: currentColor !important;
 }
 
 .stButton button,
@@ -324,6 +411,11 @@ st.markdown(
     .page-top {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .analysis-loader {
+        min-width: auto;
+        width: calc(100vw - 36px);
     }
 }
 </style>
@@ -370,13 +462,42 @@ def extract_section(text, start, end=None):
     return part.strip()
 
 
-def render_panel(title, content):
+def render_panel(title, content, min_height=145):
     safe_content = html.escape(content or "No data available.")
     st.markdown(
         f"""
         <div class="panel">
             <div class="panel-title">{title}</div>
-            <div class="scroll-box">{safe_content}</div>
+            <div class="scroll-box" style="min-height: {min_height}px;">{safe_content}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_empty_state(title, message):
+    st.markdown(
+        f"""
+        <div class="center-message">
+            <div class="panel">
+                <div class="panel-title">{html.escape(title)}</div>
+                <div class="upload-note">{html.escape(message)}</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_analysis_overlay():
+    st.markdown(
+        """
+        <div class="analysis-overlay">
+            <div class="analysis-loader">
+                <div class="loader-pulse">+</div>
+                <div class="loader-title">Analyzing your blood work report...</div>
+                <div class="loader-text">Reviewing values and preparing your summary. This will stop automatically if the AI service does not respond.</div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -474,101 +595,78 @@ Blood Report:
     }
 
 
-if "analysis" not in st.session_state:
-    st.session_state.analysis = None
-
-if "uploaded_text" not in st.session_state:
-    st.session_state.uploaded_text = ""
-
-with st.sidebar:
+def render_page_header(active_page, has_analysis):
+    page_titles = {
+        "Dashboard": ("Health Overview", "Blood report analysis dashboard"),
+        "Blood Report": ("Report Upload", "Upload or paste blood report"),
+        "Analysis": ("Analysis", "Generated blood report insights"),
+        "Health Summary": ("Health Summary", "Simple patient-friendly overview"),
+        "Diet Plan": ("Diet Plan", "Indian diet and lifestyle guidance"),
+        "Download Report": ("Download", "Export your analysis summary"),
+    }
+    eyebrow, title = page_titles.get(active_page, page_titles["Dashboard"])
+    pill = "Summary generated" if has_analysis else "Upload, analyze, and download your summary"
     st.markdown(
-        """
-        <div class="sidebar-brand">
-            <span class="brand-mark">+</span>
-            <span>Blood AI Analyst</span>
+        f"""
+        <div class="page-top">
+            <div>
+                <div class="eyebrow">{eyebrow}</div>
+                <div class="page-title">{title}</div>
+            </div>
+            <div class="status-pill">{pill}</div>
         </div>
-        <div class="nav-item active">Dashboard</div>
-        <div class="nav-item">Blood Report</div>
-        <div class="nav-item">Analysis</div>
-        <div class="nav-item">Health Summary</div>
-        <div class="nav-item">Diet Plan</div>
-        <div class="nav-item">Download Report</div>
         """,
         unsafe_allow_html=True,
     )
 
-if not api_key:
-    st.error("GOOGLE_API_KEY or GEMINI_API_KEY not found in .env file.")
-    st.stop()
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=api_key,
-    temperature=0,
-)
-
-st.markdown(
-    """
-    <div class="page-top">
-        <div>
-            <div class="eyebrow">Health Overview</div>
-            <div class="page-title">Blood report analysis dashboard</div>
-        </div>
-        <div class="status-pill">Upload, analyze, and download your summary</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-analysis = st.session_state.analysis
-has_analysis = analysis is not None
-abnormal_text = analysis.get("abnormal_values", "") if has_analysis else ""
-high_count = abnormal_text.upper().count("HIGH") if has_analysis else 0
-low_count = abnormal_text.upper().count("LOW") if has_analysis else 0
-
-st.markdown(
-    f"""
-    <div class="metric-grid">
-        <div class="metric-card">
-            <div class="metric-icon green">✓</div>
-            <div>
-                <div class="metric-label">Overall Status</div>
-                <div class="metric-value">{'Ready' if has_analysis else 'Pending'}</div>
-                <div class="metric-sub">{'Summary generated' if has_analysis else 'Awaiting analysis'}</div>
+def render_metrics(analysis, source_loaded):
+    has_analysis = analysis is not None
+    abnormal_text = analysis.get("abnormal_values", "") if has_analysis else ""
+    high_count = abnormal_text.upper().count("HIGH") if has_analysis else 0
+    low_count = abnormal_text.upper().count("LOW") if has_analysis else 0
+    st.markdown(
+        f"""
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-icon green">✓</div>
+                <div>
+                    <div class="metric-label">Overall Status</div>
+                    <div class="metric-value">{'Ready' if has_analysis else 'Pending'}</div>
+                    <div class="metric-sub">{'Summary generated' if has_analysis else 'Awaiting analysis'}</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon blue">#</div>
+                <div>
+                    <div class="metric-label">Report Source</div>
+                    <div class="metric-value">{'Loaded' if source_loaded else 'Paste'}</div>
+                    <div class="metric-sub">PDF, TXT, CSV or manual text</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon red">↑</div>
+                <div>
+                    <div class="metric-label">High Values</div>
+                    <div class="metric-value">{high_count}</div>
+                    <div class="metric-sub">Detected by AI summary</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon slate">↓</div>
+                <div>
+                    <div class="metric-label">Low Values</div>
+                    <div class="metric-value">{low_count}</div>
+                    <div class="metric-sub">Detected by AI summary</div>
+                </div>
             </div>
         </div>
-        <div class="metric-card">
-            <div class="metric-icon blue">#</div>
-            <div>
-                <div class="metric-label">Report Source</div>
-                <div class="metric-value">{'Loaded' if st.session_state.uploaded_text else 'Paste'}</div>
-                <div class="metric-sub">PDF, TXT, CSV or manual text</div>
-            </div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-icon red">↑</div>
-            <div>
-                <div class="metric-label">High Values</div>
-                <div class="metric-value">{high_count}</div>
-                <div class="metric-sub">Detected by AI summary</div>
-            </div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-icon slate">↓</div>
-            <div>
-                <div class="metric-label">Low Values</div>
-                <div class="metric-value">{low_count}</div>
-                <div class="metric-sub">Detected by AI summary</div>
-            </div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        """,
+        unsafe_allow_html=True,
+    )
 
-left_col, right_col = st.columns([0.95, 1.35], gap="large")
 
-with left_col:
+def render_report_input():
     st.markdown('<div class="panel"><div class="panel-title">Blood Report Input</div>', unsafe_allow_html=True)
     uploaded_file = st.file_uploader(
         "Upload blood report",
@@ -576,34 +674,6 @@ with left_col:
         help="Upload a text-based PDF, TXT, or CSV blood report.",
     )
 
-    st.markdown(
-        """
-        <style>
-        div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"],
-        div[data-testid="stFileUploader"] label[data-testid="stWidgetLabel"] *,
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstructions"],
-        div[data-testid="stFileUploader"] div[data-testid="stFileUploaderDropzoneInstructions"] * {
-            color: #334155 !important;
-        }
-
-        div[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"] {
-            background: #ffffff !important;
-            border: 1px solid #dbe5ef !important;
-        }
-
-        div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"],
-        div[data-testid="stFileUploader"] button[data-testid="stBaseButton-secondary"] * {
-            background: #2563eb !important;
-            border-color: #2563eb !important;
-            color: #ffffff !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    upload_warning = ""
-    uploaded_text = ""
     if uploaded_file:
         uploaded_text, upload_warning = extract_uploaded_text(uploaded_file)
         st.session_state.uploaded_text = uploaded_text
@@ -630,7 +700,6 @@ with left_col:
 
     analyze_clicked = st.button("Analyze Blood Report", type="primary", use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
-
     st.markdown(
         """
         <div class="disclaimer">
@@ -639,8 +708,10 @@ with left_col:
         """,
         unsafe_allow_html=True,
     )
+    return analyze_clicked, pasted_report
 
-with right_col:
+
+def render_preview_cards():
     top_right_a, top_right_b = st.columns([1, 1], gap="medium")
     with top_right_a:
         st.markdown(
@@ -673,26 +744,128 @@ with right_col:
             unsafe_allow_html=True,
         )
 
+
+def render_analysis_panels(analysis):
+    has_analysis = analysis is not None
     render_panel("Health Summary", analysis.get("health_summary") if has_analysis else "Your health summary will appear here.")
     render_panel("Abnormal Parameters", analysis.get("abnormal_values") if has_analysis else "High and low values will appear here.")
     render_panel("Suggested Indian Diet Plan", analysis.get("diet_plan") if has_analysis else "Diet suggestions will appear here.")
     render_panel("Lifestyle and Follow-up Advice", analysis.get("lifestyle") if has_analysis else "Lifestyle recommendations will appear here.")
 
+
+def render_download(analysis):
+    if not analysis:
+        render_empty_state("No report generated yet", "Analyze a blood report first, then this page will show the download option.")
+        return
+
+    download_text = build_download_text(analysis)
+    st.download_button(
+        "Download Analysis Summary",
+        data=download_text,
+        file_name=f"blood_analysis_summary_{datetime.now().strftime('%Y%m%d_%H%M')}.txt",
+        mime="text/plain",
+        use_container_width=True,
+    )
+    render_panel("Download Preview", download_text, min_height=260)
+
+
+if "analysis" not in st.session_state:
+    st.session_state.analysis = None
+if "uploaded_text" not in st.session_state:
+    st.session_state.uploaded_text = ""
+if "active_page" not in st.session_state:
+    st.session_state.active_page = "Dashboard"
+if "analysis_error" not in st.session_state:
+    st.session_state.analysis_error = ""
+
+nav_options = ["Dashboard", "Blood Report", "Analysis", "Health Summary", "Diet Plan", "Download Report"]
+with st.sidebar:
+    st.markdown(
+        """
+        <div class="sidebar-brand">
+            <span class="brand-mark">+</span>
+            <span>Blood AI Analyst</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    active_page = st.radio(
+        "Navigation",
+        nav_options,
+        key="active_page",
+        label_visibility="collapsed",
+    )
+
+if not api_key:
+    st.error("GOOGLE_API_KEY or GEMINI_API_KEY not found in .env file.")
+    st.stop()
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    google_api_key=api_key,
+    temperature=0,
+    request_timeout=45,
+    retries=1,
+)
+
+analysis = st.session_state.analysis
+has_analysis = analysis is not None
+
+if st.session_state.analysis_error:
+    st.error(st.session_state.analysis_error)
+
+render_page_header(active_page, has_analysis)
+render_metrics(analysis, bool(st.session_state.uploaded_text))
+
+analyze_clicked = False
+pasted_report = ""
+
+if active_page == "Dashboard":
+    left_col, right_col = st.columns([0.95, 1.35], gap="large")
+    with left_col:
+        analyze_clicked, pasted_report = render_report_input()
+    with right_col:
+        render_preview_cards()
+        render_analysis_panels(analysis)
+elif active_page == "Blood Report":
+    input_col, helper_col = st.columns([1.05, 0.95], gap="large")
+    with input_col:
+        analyze_clicked, pasted_report = render_report_input()
+    with helper_col:
+        render_preview_cards()
+elif active_page == "Analysis":
     if has_analysis:
-        download_text = build_download_text(analysis)
-        st.download_button(
-            "Download Analysis Summary",
-            data=download_text,
-            file_name=f"blood_analysis_summary_{datetime.now().strftime('%Y%m%d_%H%M')}.txt",
-            mime="text/plain",
-            use_container_width=True,
-        )
+        render_analysis_panels(analysis)
+    else:
+        render_empty_state("Analysis is waiting", "Upload or paste a blood report, then click Analyze Blood Report.")
+elif active_page == "Health Summary":
+    if has_analysis:
+        render_panel("Health Summary", analysis.get("health_summary"), min_height=260)
+        render_panel("Abnormal Parameters", analysis.get("abnormal_values"), min_height=220)
+    else:
+        render_empty_state("No health summary yet", "Generate an analysis first, then this menu will show the summary.")
+elif active_page == "Diet Plan":
+    if has_analysis:
+        render_panel("Suggested Indian Diet Plan", analysis.get("diet_plan"), min_height=260)
+        render_panel("Lifestyle and Follow-up Advice", analysis.get("lifestyle"), min_height=220)
+    else:
+        render_empty_state("No diet plan yet", "Generate an analysis first, then this menu will show diet and lifestyle guidance.")
+elif active_page == "Download Report":
+    render_download(analysis)
 
 if analyze_clicked:
     report_text = pasted_report.strip()
     if not report_text:
         st.warning("Please upload a readable report or paste blood work text before analyzing.")
     else:
-        with st.spinner("Analyzing your blood work report..."):
+        render_analysis_overlay()
+        st.session_state.analysis_error = ""
+        try:
             st.session_state.analysis = analyze_report(llm, report_text)
+            st.session_state.active_page = "Analysis"
+        except Exception as exc:
+            st.session_state.analysis_error = (
+                "Analysis could not finish. Please check your internet/API key and try again. "
+                f"Details: {exc}"
+            )
         st.rerun()
