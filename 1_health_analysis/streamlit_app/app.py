@@ -775,8 +775,14 @@ if "uploaded_text" not in st.session_state:
     st.session_state.uploaded_text = ""
 if "active_page" not in st.session_state:
     st.session_state.active_page = "Dashboard"
+if "nav_choice" not in st.session_state:
+    st.session_state.nav_choice = st.session_state.active_page
 if "analysis_error" not in st.session_state:
     st.session_state.analysis_error = ""
+if "pending_nav" in st.session_state:
+    st.session_state.active_page = st.session_state.pending_nav
+    st.session_state.nav_choice = st.session_state.pending_nav
+    del st.session_state.pending_nav
 
 nav_options = ["Dashboard", "Blood Report", "Analysis", "Health Summary", "Diet Plan", "Download Report"]
 with st.sidebar:
@@ -792,9 +798,10 @@ with st.sidebar:
     active_page = st.radio(
         "Navigation",
         nav_options,
-        key="active_page",
+        key="nav_choice",
         label_visibility="collapsed",
     )
+    st.session_state.active_page = active_page
 
 if not api_key:
     st.error("GOOGLE_API_KEY or GEMINI_API_KEY not found in .env file.")
@@ -862,7 +869,7 @@ if analyze_clicked:
         st.session_state.analysis_error = ""
         try:
             st.session_state.analysis = analyze_report(llm, report_text)
-            st.session_state.active_page = "Analysis"
+            st.session_state.pending_nav = "Analysis"
         except Exception as exc:
             st.session_state.analysis_error = (
                 "Analysis could not finish. Please check your internet/API key and try again. "
