@@ -58,11 +58,11 @@ Display Results in Streamlit UI
 
 | Dashboard | AI Analysis |
 |-----------|-------------|
-| <img src="screenshot/sc3.png" width="100%"> | <img src="screenshot/sc4.png" width="100%"> |
+| <img src="screenshot/nsc1.png" width="100%"> | <img src="screenshot/nsc2.png" width="100%"> |
 
 | Diet Plan | Final Report |
 |-----------|--------------|
-| <img src="screenshot/sc5.png" width="100%"> | <img src="screenshot/sc6.png" width="100%"> |
+| <img src="screenshot/nsc3.png" width="100%"> | <img src="screenshot/nsc4.png" width="100%"> |
 
 ---
 
